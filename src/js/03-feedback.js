@@ -4,17 +4,15 @@ const loginForm = document.querySelector(".js-feedback-form");
 loginForm.addEventListener("submit", onSubmit);
 
 const textArea = document.querySelector(".js-feedback-form textarea");
-textArea.addEventListener("input", throttle(onTextAreaInput, 500))
+textArea.addEventListener("input", throttle(onTextAreaInput, 500));
 
 const STORAGE_KEY = "feedback-form-state";
 reloadForm();
 
-
-
 function onSubmit(event) {
     event.preventDefault();
 
-        const {elements: {email, message}} = event.currentTarget;
+        const {elements: {email, message}} = event.target;
    
     if (email.value === "" || message.value === "") {
       
@@ -25,20 +23,17 @@ function onSubmit(event) {
         message: message.value,
     }
     console.log(loginObj);
-    event.currentTarget.reset();
+    event.target.reset();
     localStorage.removeItem(STORAGE_KEY);
 };
 
-
-
 function onTextAreaInput(event) { 
 
-    const massage = event.currentTarget.value;
+    const massage = event.target.value;
     
     localStorage.setItem(STORAGE_KEY, massage)
 
 };
-
 
 function reloadForm() { 
     const savedMessage = localStorage.getItem(STORAGE_KEY);
