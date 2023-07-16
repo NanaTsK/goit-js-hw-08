@@ -4,8 +4,9 @@ const loginForm = document.querySelector(".js-feedback-form");
 loginForm.addEventListener("submit", onSubmit);
 
 const textArea = document.querySelector(".js-feedback-form textarea");
-textArea.addEventListener("input", onTextAreaInput)
+textArea.addEventListener("input", throttle(onTextAreaInput, 500))
 
+const STORAGE_KEY = "feedback-form-state";
 reloadForm();
 
 
@@ -25,7 +26,7 @@ function onSubmit(event) {
     }
     console.log(loginObj);
     event.currentTarget.reset();
-    localStorage.removeItem('feedback-form-state');
+    localStorage.removeItem(STORAGE_KEY);
 };
 
 
@@ -34,23 +35,19 @@ function onTextAreaInput(event) {
 
     const massage = event.currentTarget.value;
     
-    localStorage.setItem("feedback-form-state", massage)
+    localStorage.setItem(STORAGE_KEY, massage)
 
-    // console.log(massage);
 };
 
 
 function reloadForm() { 
-    const savedMessage = localStorage.getItem("feedback-form-state");
+    const savedMessage = localStorage.getItem(STORAGE_KEY);
 
     if (savedMessage) { 
         textArea.value = savedMessage;
     }
 
 };
-
-
-// player.on("timeupdate", throttle(onTime, 500));
 
 
 // mango@mail.com
