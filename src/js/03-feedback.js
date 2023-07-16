@@ -1,12 +1,12 @@
 import throttle from 'lodash.throttle';
 
-
 const loginForm = document.querySelector(".js-feedback-form");
 loginForm.addEventListener("submit", onSubmit);
 
 const textArea = document.querySelector(".js-feedback-form textarea");
 textArea.addEventListener("input", onTextAreaInput)
 
+reloadForm();
 
 
 
@@ -40,7 +40,14 @@ function onTextAreaInput(event) {
 };
 
 
-//* function reloadPage() 
+function reloadForm() { 
+    const savedMessage = localStorage.getItem("feedback-form-state");
+
+    if (savedMessage) { 
+        textArea.value = savedMessage;
+    }
+
+};
 
 
 // player.on("timeupdate", throttle(onTime, 500));
