@@ -12,11 +12,15 @@ reloadForm();
 
 loginForm.addEventListener("submit", onSubmit);
 
-function onTextAreaInput() { 
-    const data = {
+function createFormData() {
+    return {
         email: email.value,
-        message: message.value
+        message: message.value,
     };
+}
+
+function onTextAreaInput() { 
+    const data = createFormData();
     localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
 };
 
@@ -27,10 +31,7 @@ function onSubmit(event) {
       
         alert(`Please fill out all the fields`);
     } else { 
-        const data = {
-        email: email.value,
-        message: message.value,
-    }
+        const data = createFormData();
     console.log(data);
     event.target.reset();
     localStorage.removeItem(STORAGE_KEY);
