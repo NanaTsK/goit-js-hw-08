@@ -7,7 +7,7 @@ import { galleryItems } from './gallery-items';
 
 console.log(galleryItems);
 
-const galleryEl = document.querySelector(".gallery");
+const galleryEl = document.querySelector(".js-gallery");
 
 const galleryListMarkup = galleryItems
     .map(({ preview, original, description }) =>
